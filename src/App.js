@@ -82,9 +82,9 @@ const skupiny = [
 ];
 
 function App() {
-  const [cena, setCena] = useState(100000);
-  const [skupina, setSkupina] = useState(1);
-  const [zrychleno, setZrychleno] = useState(false);
+  const [cena, setCena] = useState(500000);
+  const [skupina, setSkupina] = useState(2);
+  const [zrychleno, setZrychleno] = useState(true);
   const [tabulka, setTabulka] = useState([]);
 
   useEffect(() => {
@@ -126,52 +126,74 @@ function App() {
   }, [cena, skupina, zrychleno]);
 
   return (
-    <main>
-      <input
-        type="number"
-        placeholder="Cena"
-        value={cena}
-        onChange={(e) => {
-          setCena(e.target.value);
-        }}
-        step="1000"
-      />
-      <select value={skupina} onChange={(e) => setSkupina(e.target.value)}>
-        {skupiny.map((skupina) => {
-          return (
-            <option key={skupina.id} value={skupina.id}>
-              {skupina.id} - {skupina.popis}
-            </option>
-          );
-        })}
-      </select>
-      <select value={zrychleno} onChange={(e) => setZrychleno(e.target.value === "true")}>
-        <option value="false">rovnoměrná</option>
-        <option value="true">zrychlená</option>
-      </select>
-      {tabulka && (
-        <table>
-          <thead>
-            <tr>
-              <th>Rok</th>
-              <th>Částka</th>
-              {zrychleno && <th>Zůstatková cena</th>}
-            </tr>
-          </thead>
-          <tbody>
-            {tabulka.map((radek, i) => {
-              return (
-                <tr key={i}>
-                  <td>{radek.rok}.</td>
-                  <td>{Math.ceil(radek.castka)} Kč</td>
-                  {zrychleno && <td>{Math.floor(radek.zustatkovaCena)} Kč</td>}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      )}
-    </main>
+    <>
+      <header className="text-center mt-6 mb-3">
+        <h1 className="text-3xl font-bold text-gray-800">Daňové odpisy</h1>
+      </header>
+      <main className="max-w-screen-sm mx-auto px-4 sm:px-0 flex flex-col items-start">
+        <label htmlFor="cena" className="text-xl font-medium text-orange-500">
+          Pořizovací cena (Kč)
+        </label>
+        <input
+          type="number"
+          id="cena"
+          placeholder="Pořizovací cena"
+          value={cena}
+          onChange={(e) => {
+            setCena(e.target.value);
+          }}
+          step="1000"
+          className="bg-gray-100 focus:bg-gray-200 outline-none rounded-lg mt-1 px-4 py-2"
+        />
+        <label htmlFor="skupina" className="text-xl font-medium text-orange-500 mt-4">
+          Odpisovací skupina
+        </label>
+        <select id="skupina" value={skupina} onChange={(e) => setSkupina(e.target.value)} className="bg-gray-100 focus:bg-gray-200 outline-none rounded-lg mt-1 px-4 py-2 max-w-full">
+          {skupiny.map((skupina) => {
+            return (
+              <option key={skupina.id} value={skupina.id}>
+                {skupina.id} - {skupina.popis}
+              </option>
+            );
+          })}
+        </select>
+        <label htmlFor="skupina" className="text-xl font-medium text-orange-500 mt-4">
+          Rovnoměrné/zrychlené odpisování
+        </label>
+        <select value={zrychleno} onChange={(e) => setZrychleno(e.target.value === "true")} className="bg-gray-100 focus:bg-gray-200 outline-none rounded-lg mt-1 px-4 py-2 max-w-full">
+          <option value="false">rovnoměrné</option>
+          <option value="true">zrychlené</option>
+        </select>
+        {tabulka && (
+          <table className="mt-6 border-collapse text-center block overflow-x-auto whitespace-nowrap">
+            <thead>
+              <tr className="font-medium text-lg text-orange-500">
+                <th>Rok</th>
+                <th>Částka</th>
+                {zrychleno && <th>Zůstatková cena</th>}
+              </tr>
+            </thead>
+            <tbody>
+              {tabulka.map((radek, i) => {
+                return (
+                  <tr key={i}>
+                    <td>{radek.rok}.</td>
+                    <td>{Math.ceil(radek.castka)} Kč</td>
+                    {zrychleno && <td>{Math.floor(radek.zustatkovaCena)} Kč</td>}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        )}
+      </main>
+      <footer className="text-center my-6 font-medium text-gray-700">
+        Vytvořil{" "}
+        <a href="https://hynekfisera.com/" className="text-orange-500 hover:underline">
+          Hynek Fišera
+        </a>
+      </footer>
+    </>
   );
 }
 
