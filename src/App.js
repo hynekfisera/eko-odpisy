@@ -128,7 +128,7 @@ function App() {
   return (
     <>
       <header className="text-center mt-6 mb-3">
-        <h1 className="text-3xl font-bold text-gray-800">Daňové odpisy</h1>
+        <h1 className="text-3xl font-bold text-gray-800">Odpisová kalkulačka</h1>
       </header>
       <main className="max-w-screen-sm mx-auto px-4 sm:px-0 flex flex-col items-start">
         <label htmlFor="cena" className="text-xl font-medium text-orange-500">
@@ -146,7 +146,7 @@ function App() {
           className="bg-gray-100 focus:bg-gray-200 outline-none rounded-lg mt-1 px-4 py-2"
         />
         <label htmlFor="skupina" className="text-xl font-medium text-orange-500 mt-4">
-          Odpisovací skupina
+          Odpisová skupina
         </label>
         <select id="skupina" value={skupina} onChange={(e) => setSkupina(e.target.value)} className="bg-gray-100 focus:bg-gray-200 outline-none rounded-lg mt-1 px-4 py-2 max-w-full">
           {skupiny.map((skupina) => {
