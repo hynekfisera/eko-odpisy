@@ -131,6 +131,9 @@ function App() {
         <h1 className="text-3xl font-bold text-gray-800">Odpisová kalkulačka</h1>
       </header>
       <main className="max-w-screen-sm mx-auto px-4 sm:px-0 flex flex-col items-start">
+        <section className="text-red-500 my-4">
+          <strong>Upozornění:</strong> Tato aplikace byla vytvořena v rámci studia předmětu Ekonomika. Výpočty odpovídají zákonům které platily v době tvorby aplikace a <strong>nemusí být aktuální.</strong>
+        </section>
         <label htmlFor="cena" className="text-xl font-medium text-orange-500">
           Pořizovací cena (Kč)
         </label>
